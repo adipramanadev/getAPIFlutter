@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'detailpage.dart';
 import 'helper/databaseHelper.dart';
 
 class HomePage extends StatefulWidget {
@@ -58,9 +59,26 @@ class ItemList extends StatelessWidget {
       itemCount: list == null ? 0 : list.length,
       itemBuilder: (BuildContext context, int index) {
         String imageUrl = list[index]['image'];
-        return ListTile(
-          title: Text(list[index]['name']),
-          leading: imageUrl != null ? Image.network(imageUrl) : null,
+        return GestureDetector(
+          onTap: () {
+            // print(list[index]['id']);
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => DetailPage(
+                  list: list,
+                  index: index,
+                
+                
+                
+                ),
+              ),
+            );
+            // print("test0");
+          },
+          child: ListTile(
+            title: Text(list[index]['name']),
+            leading: imageUrl != null ? Image.network(imageUrl) : null,
+          ),
         );
       },
     );
